@@ -23,13 +23,6 @@
 //* Recupero dal DOM gli elemnti che mi servono
 
 let postsList = document.querySelector('.posts-list');
-const postCard = document.querySelector('.post');
-const postIcon = document.querySelector('.post-meta__icon');
-const profilePic = document.querySelector('.profile-pic');
-const authorName = document.querySelector('.post-meta__author');
-const postDate = document.querySelector('.post-meta__time');
-const postText = document.querySelector('.post__text');
-const postImage = document.querySelector('.post__image');
 const likeButton = document.querySelector('.js-like-button');
 const likesCounter = document.querySelector('.js-likes-counter');
 
@@ -38,7 +31,7 @@ const likesCounter = document.querySelector('.js-likes-counter');
 const postStructure = [
     {
         id: 1,
-        author: 'Phil Mangione',
+        authorName: 'Phil Mangione',
         profilePhoto: 'https://unsplash.it/300/300?image=15',
         date: '07-06-2022',
         text: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.',
@@ -46,12 +39,55 @@ const postStructure = [
         likes: 80,
     },
     {
-        id: 1,
-        author: 'Phil Mangione',
-        profilePhoto: 'https://unsplash.it/300/300?image=15',
-        date: '07-06-2022',
+        id: 2,
+        authorName: 'Marco Calligaris',
+        profilePhoto: 'https://unsplash.it/300/300?image=40',
+        date: '10-05-2021',
         text: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.',
-        image: 'https://unsplash.it/600/300?image=171',
+        image: 'https://unsplash.it/600/300?image=80',
         likes: 80,
     },
 ]
+
+console.table(postStructure)
+
+let postCards = '';
+for (let i = 0; i < postStructure.length; i++) {
+    const label = postStructure[i];
+
+    postCards += `
+    <div class="post">
+    <div class="post__header">
+      <div class="post-meta">
+        <div class="post-meta__icon">
+          <img class="profile-pic" src="${label.profilePhoto}" alt="${label.authorName}" />
+        </div>
+        <div class="post-meta__data">
+          <div class="post-meta__author">${label.authorName}</div>
+          <div class="post-meta__time">${label.date}</div>
+        </div>
+      </div>
+    </div>
+    <div class="post__text">
+    ${label.text}
+    </div>
+    <div class="post__image">
+      <img src="${label.image}" alt="" />
+    </div>
+    <div class="post__footer">
+      <div class="likes js-likes">
+        <div class="likes__cta">
+          <a class="like-button js-like-button" href="#" data-postid="1">
+            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+            <span class="like-button__label">Mi Piace</span>
+          </a>
+        </div>
+        <div class="likes__counter">Piace a <b id="like-counter-1" class="js-likes-counter">${label.likes}</b> persone</div>
+      </div>
+    </div>
+  </div>
+    `;
+}
+
+postsList.innerHTML = postCards;
+
